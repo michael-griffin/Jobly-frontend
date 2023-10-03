@@ -1,6 +1,6 @@
 
 
-function SearchForm(searchFunction) {
+function SearchForm(handleList) {
   const [searchTerm, setSearchTerm] = useState("");
 
   function handleSearchTermChange(evt) {
@@ -10,17 +10,20 @@ function SearchForm(searchFunction) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    searchFunction(searchTerm);
+    handleList(searchTerm);
     setSearchTerm("");
   }
 
   return (
     <form onSumbit={handleSubmit}>
-      <input onChange={handleSearchTermChange} value={searchTerm} placeholder="Search" name="search" />
+      <input onChange={handleSearchTermChange}
+        value={searchTerm}
+        placeholder="Search"
+        name="search" />
       <button>Submit</button>
     </form>
   );
 
 }
 
-export default Homepage;
+export default SearchForm;
