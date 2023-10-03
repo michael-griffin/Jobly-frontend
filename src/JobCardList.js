@@ -5,7 +5,6 @@ import JobCard from "./JobCard";
 
 function JobCardList({jobs}){
 
-  //{title, companyHandle, salary, equity}
   function makeJobCards(){
     return jobs.map(job => (
       <JobCard key={job.id} title={job.title} companyHandle={job.companyHandle}
