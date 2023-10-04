@@ -26,7 +26,9 @@ import jwt_decode from "jwt-decode";
 function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
+  console.log('at app start, isLoaded is: ', isLoaded);
 
   useEffect(function getUserToken() {
     let possToken = localStorage.getItem('token');
@@ -41,7 +43,7 @@ function App() {
     setToken(token);
     (token) ?
       localStorage.setItem('token', token) :
-      localStorage.removeItem("token"); // Remove token from local storage
+      localStorage.removeItem("token");
   }
 
   async function login(formData) {
@@ -69,20 +71,30 @@ function App() {
 
         const userData = await JoblyApi.getUserInfo(decoded.username);
         setUser(userData.user);
+        console.log('user data updated');
+        setIsLoaded(true);
+      } else {
+        setIsLoaded(true);
       }
+
     }
     fetchUserData();
   }, [token]);
 
 
+
   return (
     <div className="App">
-      <userContext.Provider value={{ user, token }}>
-        <BrowserRouter>
-          <Nav user={user} logout={logout} />
-          <RoutesList user={user} login={login} signup={signup} />
-        </BrowserRouter>
-      </userContext.Provider>
+      {isLoaded ?
+            <userContext.Provider value={{ user, token }}>
+            <BrowserRouter>
+              <Nav user={user} logout={logout} />
+              <RoutesList user={user} login={login} signup={signup} />
+            </BrowserRouter>
+          </userContext.Provider>
+      :
+      <p>Loading...</p>
+      }
     </div>
   );
 }
