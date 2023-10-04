@@ -4,9 +4,18 @@ import { useParams, Navigate } from "react-router-dom";
 import JoblyApi from "./api";
 
 
+/* Displays company info and a list of jobs particular to that company
+ *
+ * Props: None
+ *
+ * State:
+ *  - company: The current company
+ *  - isError: Whether the API call is successful/not. If not, redirects to NotFound page.
+ *
+ * CompanyList -> CompanyCard -> CompanyDetail -> JobCardList
+ */
 function CompanyDetail() {
   const [company, setCompany] = useState(null);
-  // const [message, setMessage] = useState("is loading");
   const [isError, setIsError] = useState(false);
 
   const params = useParams();
@@ -19,9 +28,6 @@ function CompanyDetail() {
         setCompany(company);
       } catch (err){
         setIsError(true);
-        // return <Navigate to="/NotFound" />
-        // setMessage(<Navigate to="/NotFound" />)
-        // setMessage(err[0].message);
       }
     }
     fetchCompanyInfo();

@@ -4,6 +4,16 @@ import SearchForm from "./SearchForm";
 import JoblyApi from "./api";
 
 
+/* Displays a list of companies (which can be narrowed by Search)
+ *
+ * Props: None
+ *
+ * State:
+ *  - companies: The list of companies
+ *  - isError: Whether the API call is successful/not. If not, redirects to NotFound page.
+ *
+ * App -> RoutesList -> CompanyList -> CompanyCard
+ */
 function CompanyList() {
 
   const [companies, setCompanies] = useState([]);
@@ -24,8 +34,12 @@ function CompanyList() {
   function makeCompanyCardList() {
     console.log('companies is : ', companies);
     return companies.map(company => (
-      <CompanyCard key={company.handle} handle={company.handle} name={company.name} description={company.description}
-        logoUrl={company.logoUrl} />
+      <CompanyCard key={company.handle}
+        handle={company.handle}
+        name={company.name}
+        description={company.description}
+        logoUrl={company.logoUrl}
+      />
     ));
   }
 

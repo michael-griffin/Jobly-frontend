@@ -1,4 +1,5 @@
 
+/** Displays Job Card with info on company, salary, equity. */
 function JobCard({title, companyHandle, salary, equity} ){
 
   return (

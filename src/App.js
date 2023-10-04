@@ -8,10 +8,8 @@ import JoblyApi from './api';
 import jwt_decode from "jwt-decode";
 
 // Notes on context:
-//  - Want to use user context primarily in jobCard component. For profile update form, nav and homepage, we can pass directly as prop.
-
-// Local storage for token and user (step 4, so after above tasks)
-// TODO: DOCSTRINGS!
+//  - Want to use user context primarily in jobCard component.
+//  For profile update form, nav and homepage, we can pass directly as prop.
 
 
 /** App: Job app. Allows user to sign in and view jobs and companies

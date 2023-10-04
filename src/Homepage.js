@@ -1,6 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import './Homepage.css';
 
+/** Homepage which displays welcome message or login/sign up buttons */
 function Homepage({ user }) {
   return (
     <div className="Homepage">
