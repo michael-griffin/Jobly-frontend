@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function SearchForm({ handleList }) {
+function SearchForm({ handleSubmit }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   function handleSearchTermChange(evt) {
@@ -8,13 +8,13 @@ function SearchForm({ handleList }) {
     setSearchTerm(term);
   }
 
-  function handleSubmit(evt) {
+  function submitForm(evt) {
     evt.preventDefault();
-    handleList(searchTerm);
+    handleSubmit(searchTerm);
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={submitForm}>
       <input onChange={handleSearchTermChange}
         value={searchTerm}
         placeholder="Search"

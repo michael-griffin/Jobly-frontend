@@ -7,9 +7,6 @@ import { Link } from "react-router-dom";
  */
 function CompanyCard({ name, handle, description, logoUrl }) {
 
-  // const logoURL = new URL(logo);
-  // const logoPath = `./logos/${logoURL}`;
-  // console.log('title')
 
   return (
     <Link to={`/companies/${handle}`}>

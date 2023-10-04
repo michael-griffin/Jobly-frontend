@@ -31,7 +31,7 @@ function CompanyList() {
 
   return (
     <div className="CompanyList">
-      <SearchForm handleList={searchCompaniesFromApi} />
+      <SearchForm handleSubmit={searchCompaniesFromApi} />
       {makeCompanyCardList()}
     </div>
   );

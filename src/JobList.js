@@ -10,7 +10,6 @@ function JobList() {
   useEffect(function getJobs() {
     async function getJobsFromApi() {
       const jobs = await JoblyApi.getJobs();
-      console.log("jobs list is: ", jobs);
       setJobs(jobs);
     }
     getJobsFromApi();
@@ -25,7 +24,7 @@ function JobList() {
 
   return (
     <div className="JobList">
-      <SearchForm handleList={searchJobsFromApi} />
+      <SearchForm handleSubmit={searchJobsFromApi} />
       <JobCardList jobs={jobs} />
     </div>
   );
