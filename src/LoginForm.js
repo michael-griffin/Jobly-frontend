@@ -21,7 +21,9 @@ function LoginForm({ handleSubmit }) {
     evt.preventDefault();
     //API CALL HERE
     async function loginUser(){
-      JoblyApi.loginUser(formData);
+      const token = await JoblyApi.loginUser(formData);
+      const userData =
+
       return userData;
     }
 

@@ -85,6 +85,26 @@ class JoblyApi {
     return res.companies;
   }
 
+  static async registerUser(userRegisterInfo) {
+    const res = await this.request('auth/register', userRegisterInfo);
+    const token = res.token;
+    JoblyApi.token = token;
+    return token;
+  }
+
+  static async loginUser(userLoginInfo) {
+    const res = await this.request('auth/token', userLoginInfo);
+    const token = res.token;
+    JoblyApi.token = token;
+    return token;
+  }
+
+  static async getUserInfo(username) {
+    const user = await this.request(`users/${username}`);
+    JoblyApi.token = token;
+    return user;
+  }
+
 }
 
 export default JoblyApi;

@@ -7,6 +7,8 @@ import Nav from './Nav';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [token, setToken] = useState(null);
+
 
   //currentUser state
   //token state
