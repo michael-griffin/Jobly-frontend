@@ -1,18 +1,32 @@
 import "./Nav.css";
-import {NavLink, Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
-//FIXME: switch to Navlinks when we care about active for styling
-//a.active
 
-function Nav(){
+
+function Nav({ user, login, signup, logout }) {
 
   return (
     <nav className="NavBar">
-      <NavLink to="/">Jobly</NavLink>
-      <NavLink to="/companies">Companies</NavLink>
-      <NavLink to="/jobs">Jobs</NavLink>
+      {user ?
+        <>
+          <NavLink to="/">Jobly</NavLink>
+          <NavLink to="/companies">Companies</NavLink>
+          <NavLink to="/jobs">Jobs</NavLink>
+          <NavLink to="/" onClick={logout}>Logout</NavLink>
+        </>
+        :
+        <>
+          <NavLink to="/">Jobly</NavLink>
+          <NavLink to="/signup" >Sign Up</NavLink>
+          <NavLink to="/login" >Login</NavLink>
+        </>
+      }
     </nav>
-  )
+
+
+
+
+  );
 }
 
 

@@ -1,3 +1,5 @@
+import {useState} from "react";
+import JoblyApi from "./api";
 
 function LoginForm({ handleSubmit }) {
 
@@ -19,15 +21,13 @@ function LoginForm({ handleSubmit }) {
 
   function submitForm(evt) {
     evt.preventDefault();
-    //API CALL HERE
+
     async function loginUser(){
       const token = await JoblyApi.loginUser(formData);
-      const userData =
-
-      return userData;
+      const userData = await JoblyApi.getUserInfo(formData.username);
+      handleSubmit(userData, token);
     }
-
-    handleSubmit(userData);
+    loginUser();
   }
 
   return (

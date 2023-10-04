@@ -1,8 +1,9 @@
 import './App.css';
-import {useState} from "react";
+import { useState } from "react";
 import { BrowserRouter } from 'react-router-dom';
 import RoutesList from './RoutesList';
 import Nav from './Nav';
+import userContext from "./userContext";
 
 
 function App() {
@@ -10,22 +11,30 @@ function App() {
   const [token, setToken] = useState(null);
 
 
-  //currentUser state
-  //token state
-    //(both are living in context?)
-
-  function changeUser(userInfo){
-    //make API call here?
+  function login(userData, token) {
     setUser(userData);
+    setToken(token);
+  }
+
+  function signup(userData) {
+    setUser(userData);
+    setToken(token);
+  }
+
+  function logout() {
+    setUser(null);
+    setToken(null);
+    <Navigate to="/" />
   }
 
   return (
     <div className="App">
-      <BrowserRouter>
-        <Nav />
-        <RoutesList />
-      </BrowserRouter>
-
+      <userContext.Provider value={{ user, token }}>
+        <BrowserRouter>
+          <Nav user={user} logout={logout} />
+          <RoutesList login={login} signup={signup} />
+        </BrowserRouter>
+      </userContext.Provider>
     </div>
   );
 }

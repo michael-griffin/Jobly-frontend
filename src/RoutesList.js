@@ -9,7 +9,7 @@ import LoginForm from './LoginForm';
 import ProfileForm from './ProfileForm';
 
 
-function RoutesList({ user }) {
+function RoutesList({ user, signup, login }) {
 
 
   return (
@@ -27,8 +27,8 @@ function RoutesList({ user }) {
         :
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/signup" element={<SignupForm />} />
-          <Route path="/login" element={<LoginForm />} />
+          <Route path="/signup" element={<SignupForm handleSubmit={signup}/>} />
+          <Route path="/login" element={<LoginForm handleSubmit={login}/>} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       }
