@@ -1,16 +1,19 @@
 import SearchForm from "./SearchForm";
 import JobCardList from "./JobCardList";
 import { useEffect, useState } from "react";
-// import api from './api';
-import jobData from "./utils/jobDataSmall";
+import JoblyApi from './api';
 
 
 function JobList() {
   const [jobs, setJobs] = useState([]);
 
-  useEffect(function getJobs(){
-    //This will eventually be a fetch request.
-    setJobs(jobData);
+
+  useEffect(function getJobs(){ async function getJobsFromApi() {
+    const resp = await JoblyApi.getJobs();
+    const jobs = await resp.json();
+    setJobs(jobs);
+  }
+    getJobsFromApi();
   }, [])
 
   function filterList(searchTerm) {

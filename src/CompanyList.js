@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
-import companyData from "./utils/companyDataSmall";
+import JoblyApi from "./api";
 
 
 function CompanyList() {
 
   const [companies, setCompanies] = useState([]);
 
-  useEffect(function getCompanies(){
-    //This will eventually be a fetch request.
-    setCompanies(companyData);
-  }, []);
+  useEffect(function getCompanies(){ async function getCompaniesFromApi() {
+    const companies = await JoblyApi.getCompanies();
+    setCompanies(companies);
+  }
+    getCompaniesFromApi();
+  }, [])
 
 
   function filterList(searchTerm) {
