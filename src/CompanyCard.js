@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import "./CompanyCard.css";
 /** Company card: displays as one of many in list of companies
  * ALSO clicking a card opens up a company detail page, which has a list
  * of jobs relevant to that company. Passes company handle to company detail
@@ -7,12 +7,11 @@ import { Link } from "react-router-dom";
  */
 function CompanyCard({ name, handle, description, logoUrl }) {
 
-
   return (
-    <Link to={`/companies/${handle}`}>
+    <Link className="CompanyCard-Link" to={`/companies/${handle}`}>
       <div className="CompanyCard">
-        <h6>{name}</h6>
-        <img src={logoUrl} alt={name} />
+        <h6>{name} {logoUrl && <img src={logoUrl} alt={name} />}</h6>
+
         <p><small>{description}</small></p>
       </div>
     </Link>

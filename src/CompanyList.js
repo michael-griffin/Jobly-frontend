@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import CompanyCard from "./CompanyCard";
-import SearchForm from "./SearchForm";
+import SearchBar from "./SearchBar";
 import JoblyApi from "./api";
-
+import _ from "lodash"; //possible alternative: import {debounce} from "lodash"
 
 /* Displays a list of companies (which can be narrowed by Search)
  *
@@ -26,13 +26,16 @@ function CompanyList() {
     getCompaniesFromApi();
   }, []);
 
+
+  const debounceTime = 1000; //time in ms
+  const debounceSearch = _.debounce(searchCompaniesFromApi, debounceTime);
+
   async function searchCompaniesFromApi(searchTerm) {
     const companies = await JoblyApi.getCompanies(searchTerm);
     setCompanies(companies);
   }
 
   function makeCompanyCardList() {
-    console.log('companies is : ', companies);
     return companies.map(company => (
       <CompanyCard key={company.handle}
         handle={company.handle}
@@ -45,7 +48,7 @@ function CompanyList() {
 
   return (
     <div className="CompanyList">
-      <SearchForm handleSubmit={searchCompaniesFromApi} />
+      <SearchBar handleSearch={debounceSearch} />
       {makeCompanyCardList()}
     </div>
   );

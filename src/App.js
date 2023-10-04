@@ -1,11 +1,18 @@
 import './App.css';
 import { useEffect, useState } from "react";
-import { BrowserRouter, Navigate } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom'; //Navigate
 import RoutesList from './RoutesList';
 import Nav from './Nav';
 import userContext from "./userContext";
 import JoblyApi from './api';
 import jwt_decode from "jwt-decode";
+
+//TODO: update Josh about:
+//Profile form: form itself basically unchanged, added a few things to app/api
+// App: updated user now sets User State (as we'd expect)
+// api: updateUser method now accepts both user AND username
+//    (wasn't grabbing user properly, hence authorization error)
+
 
 // Notes on context:
 //  - Want to use user context primarily in jobCard component.
@@ -56,8 +63,9 @@ function App() {
   }
 
   async function update(formData) {
-    const token = await JoblyApi.updateUser(formData);
-    updateToken(token);
+    JoblyApi.token = token;
+    const newUser = await JoblyApi.updateUser(user.username, formData);
+    setUser(newUser);
   }
 
   function logout() {

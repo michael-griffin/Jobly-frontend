@@ -6,20 +6,18 @@ import userContext from "./userContext";
 /** Form for updating a user's profile */
 function ProfileForm({ handleSubmit }) {
 
-  const data = useContext(userContext);
-  const allUserData = data.user;
+  const allData = useContext(userContext);
+  const userData = allData.user;
 
-  console.log("All user DATA", allUserData);
-  const userUpdateData = {firstName: allUserData.firstName, lastName: allUserData.lastName, email: allUserData.email};
+  const initialFormData = {
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+    email: userData.email
+  };
 
-  // const [formData, setFormData] = useState(null);
-  const [formData, setFormData] = useState(userUpdateData);
+
+  const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(null);
-
-  // TODO: Define these functions elsewhere, do the work inside of submitForm.
-  // TODO: Take user info from context instead of from props. -> DONE
-  // TODO: Autopopulate form with user info -> DONE, but with possible cleanup/refactor needed.
-  // TODO: Add labels/text next to form fields
 
   function submitForm(evt) {
     evt.preventDefault();
@@ -27,7 +25,6 @@ function ProfileForm({ handleSubmit }) {
     async function updateUser() {
       try {
         console.log("formData", formData);
-        //const token = await JoblyApi.registerUser(formData);
         await handleSubmit(formData);
       } catch (error) {
         const errorArr = error[0].message;
@@ -47,23 +44,24 @@ function ProfileForm({ handleSubmit }) {
 
   return (
     <>
-      <form onSubmit={submitForm}>
+      <form className="ProfileForm" onSubmit={submitForm}>
+        <label className="form-label" htmlFor="username">Username</label>
         <input onChange={handleFormChange}
           disabled={true}
-          value={allUserData.username}
+          value={userData.username}
           placeholder="Username"
           name="username" />
-        <br />
+        <label className="form-label" htmlFor="firstName">First name</label>
         <input onChange={handleFormChange}
           value={formData.firstName}
           placeholder="First name"
           name="firstName" />
-        <br />
+        <label className="form-label" htmlFor="lastName">Last name</label>
         <input onChange={handleFormChange}
           value={formData.lastName}
           placeholder="Last name"
           name="lastName" />
-        <br />
+        <label className="form-label" htmlFor="email">Email</label>
         <input onChange={handleFormChange}
           value={formData.email}
           placeholder="Email"

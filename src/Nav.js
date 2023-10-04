@@ -13,7 +13,7 @@ function Nav({ user, login, signup, logout }) {
           <NavLink to="/companies">Companies</NavLink>
           <NavLink to="/jobs">Jobs</NavLink>
           <NavLink to="/profile">Profile</NavLink>
-          <NavLink to="/" onClick={logout}>Logout</NavLink>
+          <Link to="/" onClick={logout}>Logout</Link>
         </>
         :
         <>

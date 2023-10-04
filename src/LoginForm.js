@@ -29,8 +29,6 @@ function LoginForm({ handleSubmit }) {
 
   async function loginUser(){
     try {
-      //const token = await JoblyApi.loginUser(formData);
-      // const userData = await JoblyApi.getUserInfo(formData.username);
       await handleSubmit(formData);
     } catch(error) {
       const errorArr = error[0].message;
@@ -40,11 +38,13 @@ function LoginForm({ handleSubmit }) {
 
   return (
     <>
-    <form onSubmit={submitForm}>
+    <form className="LoginForm" onSubmit={submitForm}>
+      <label className="form-label" htmlFor="username">Username</label>
       <input onChange={handleFormChange}
         value={formData.username}
         placeholder="Username"
         name="username" />
+      <label className="form-label" htmlFor="password">Password</label>
       <input type="password" onChange={handleFormChange}
         value={formData.password}
         placeholder="Password"
