@@ -5,7 +5,7 @@ import RoutesList from './RoutesList';
 import Nav from './Nav';
 import userContext from "./userContext";
 import JoblyApi from './api';
-
+import jwt_decode from "jwt-decode";
 
 // Notes on context:
 //  - Want to use user context primarily in jobCard component. For profile update form, nav and homepage, we can pass directly as prop.
@@ -17,36 +17,52 @@ import JoblyApi from './api';
 
 /**  */
 function App() {
-  const [username, setUsername] = useState(null);
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
-  // TODO: Make these async functions that also set the token
-  function login(username, token) {
-    setUsername(username);
+
+  useEffect(function getUserToken(){
+    let possToken = localStorage.getItem('token');
+    if (token === null && possToken !== null){
+      setToken(possToken);
+    }
+  }, []);
+
+  function updateToken(token){
     setToken(token);
+    localStorage.setItem('token', token);
   }
 
-  function signup(username, token) {
-    setUsername(username);
-    setToken(token);
+  async function login(formData) {
+    const token = await JoblyApi.loginUser(formData);
+    updateToken(token);
+  }
+
+  async function signup(formData) {
+    const token = await JoblyApi.registerUser(formData);
+    updateToken(token);
   }
 
   function logout() {
     setUser(null);
-    setUsername(null);
-    setToken(null);
+    updateToken(null);
   }
 
   useEffect(function getUserData() {
     async function fetchUserData() {
-      if (username && token) {
-        const userData = await JoblyApi.getUserInfo(username);
+      //console.log('token pre-fetch is: ', token);
+      if (token !== null) {
+        JoblyApi.token = token;
+        const decoded = jwt_decode(token);
+
+        const userData = await JoblyApi.getUserInfo(decoded.username);
         setUser(userData.user);
       }
     }
     fetchUserData();
   }, [token]);
+
+
 
   return (
     <div className="App">

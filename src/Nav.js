@@ -23,9 +23,6 @@ function Nav({ user, login, signup, logout }) {
       }
     </nav>
 
-
-
-
   );
 }
 

@@ -28,12 +28,11 @@ function LoginForm({ handleSubmit }) {
 
   async function loginUser(){
     try {
-      const token = await JoblyApi.loginUser(formData);
+      //const token = await JoblyApi.loginUser(formData);
       // const userData = await JoblyApi.getUserInfo(formData.username);
-      handleSubmit(formData.username, token);
+      await handleSubmit(formData);
     } catch(error) {
-      //console.log("Errors" , error);
-      const errorArr = [error[0].message]; // TODO: Refactor alert
+      const errorArr = error[0].message;
       setErrors(errorArr);
     }
   }
