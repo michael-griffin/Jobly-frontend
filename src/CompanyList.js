@@ -16,9 +16,9 @@ function CompanyList() {
     getCompaniesFromApi();
   }, []);
 
-
-  function filterList(searchTerm) {
-    console.log('tried to filter!');
+  async function searchCompaniesFromApi(searchTerm) {
+    const companies = await JoblyApi.getCompanies(searchTerm);
+    setCompanies(companies);
   }
 
   function makeCompanyCardList() {
@@ -31,7 +31,7 @@ function CompanyList() {
 
   return (
     <div className="CompanyList">
-      <SearchForm handleList={filterList} />
+      <SearchForm handleList={searchCompaniesFromApi} />
       {makeCompanyCardList()}
     </div>
   );

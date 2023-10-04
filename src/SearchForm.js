@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function SearchForm(handleList) {
+function SearchForm({ handleList }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   function handleSearchTermChange(evt) {
@@ -11,7 +11,6 @@ function SearchForm(handleList) {
   function handleSubmit(evt) {
     evt.preventDefault();
     handleList(searchTerm);
-    setSearchTerm("");
   }
 
   return (

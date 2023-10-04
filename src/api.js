@@ -57,7 +57,7 @@ class JoblyApi {
 
   /** Get details on a company by search term. */
 
-  static async getJobs(searchTerm=null) {
+  static async getJobs(searchTerm = null) {
 
     let res;
     if (searchTerm) {
@@ -75,12 +75,13 @@ class JoblyApi {
     return res.jobs;
   }
 
-  static async getCompanies(searchTerm=null) {
+  static async getCompanies(searchTerm = null) {
     let res;
     if (searchTerm) {
       res = await this.request(`companies`, { nameLike: searchTerm });
     } else {
-      res = await this.request(`companies`);    }
+      res = await this.request(`companies`);
+    }
     return res.companies;
   }
 

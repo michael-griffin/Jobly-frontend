@@ -16,14 +16,16 @@ function JobList() {
     getJobsFromApi();
   }, []);
 
-  function filterList(searchTerm) {
-    console.log('tried to filter!');
+
+  async function searchJobsFromApi(searchTerm) {
+    const jobs = await JoblyApi.getJobs(searchTerm);
+    setJobs(jobs);
   }
 
 
   return (
     <div className="JobList">
-      <SearchForm handleList={filterList} />
+      <SearchForm handleList={searchJobsFromApi} />
       <JobCardList jobs={jobs} />
     </div>
   );
