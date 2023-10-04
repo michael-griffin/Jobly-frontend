@@ -1,21 +1,36 @@
 import { useEffect, useState } from "react";
 import JobCardList from "./JobCardList";
 import { useParams } from "react-router-dom";
-import jobData from "./utils/jobDataSmall";
+import JoblyApi from "./api";
 
 
-function CompanyDetail () {
-  const params = useParams();
-  const companyName = params.name;
+function CompanyDetail() {
 
+  const initialCompanyInfo = {
+    name: "",
+    description: ""
+  };
+  const [company, setCompany] = useState(initialCompanyInfo);
+  const [isLoaded, setIsLoaded] = useState(false);
   const [jobs, setJobs] = useState([]);
 
-  useEffect( function getJobsFromCompany(){
+  const params = useParams();
+  const handle = params.handle;
 
-    const matchingJobs = jobData.filter(job => (
-      job.companyHandle === companyName
-    ))
-    setJobs(matchingJobs);
+  useEffect(function getJobsAndCompany() {
+    async function fetchCompanyInfo() {
+      const company = await JoblyApi.getCompany(handle);
+      setCompany(company);
+      console.log("hurray success");
+    }
+    async function fetchJobsFromCompany() {
+      const jobs = await JoblyApi.getJobsByCompany(handle);
+      setJobs(jobs);
+      setIsLoaded(true);
+    }
+    fetchCompanyInfo();
+    fetchJobsFromCompany();
+
   }, []);
 
   // useEffect(function fetchJobsFromCompany(){
@@ -25,12 +40,24 @@ function CompanyDetail () {
   // }, [companyName])
   //query backend with yet to be determined function
 
+  // const matchingJobs = jobData.filter(job => (
+  //   job.companyHandle === companyName
+  // ))
+
   return (
     <div className="CompanyDetail">
-      <h1>Jobs for {companyName}</h1>
-      <JobCardList jobs={jobs}/>
+      {isLoaded ?
+        <>
+          <h1>Jobs for {company.name}</h1>
+          <p>{company.description}</p>
+          <JobCardList jobs={jobs} />
+        </>
+        :
+        <p>Still loading!</p>
+      }
+
     </div>
-  )
+  );
 }
 
 

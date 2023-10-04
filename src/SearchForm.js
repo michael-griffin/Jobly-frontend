@@ -15,7 +15,7 @@ function SearchForm(handleList) {
   }
 
   return (
-    <form onSumbit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <input onChange={handleSearchTermChange}
         value={searchTerm}
         placeholder="Search"

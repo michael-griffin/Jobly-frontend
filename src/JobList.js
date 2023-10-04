@@ -7,14 +7,14 @@ import JoblyApi from './api';
 function JobList() {
   const [jobs, setJobs] = useState([]);
 
-
-  useEffect(function getJobs(){ async function getJobsFromApi() {
-    const resp = await JoblyApi.getJobs();
-    const jobs = await resp.json();
-    setJobs(jobs);
-  }
+  useEffect(function getJobs() {
+    async function getJobsFromApi() {
+      const jobs = await JoblyApi.getJobs();
+      console.log("jobs list is: ", jobs);
+      setJobs(jobs);
+    }
     getJobsFromApi();
-  }, [])
+  }, []);
 
   function filterList(searchTerm) {
     console.log('tried to filter!');
@@ -23,10 +23,10 @@ function JobList() {
 
   return (
     <div className="JobList">
-      <SearchForm handleList={filterList}/>
-      <JobCardList jobs={jobs}/>
+      <SearchForm handleList={filterList} />
+      <JobCardList jobs={jobs} />
     </div>
-  )
+  );
 }
 
 export default JobList;
