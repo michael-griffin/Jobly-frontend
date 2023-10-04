@@ -30,8 +30,9 @@ function LoginForm({ handleSubmit }) {
         const userData = await JoblyApi.getUserInfo(formData.username);
         handleSubmit(userData, token);
       } catch(error) {
-        console.log("Errors" , error);
-        setErrors(error);
+        //console.log("Errors" , error);
+        const errorArr = [error[0].message];
+        setErrors(errorArr);
       }
     }
     loginUser();

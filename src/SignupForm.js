@@ -1,5 +1,6 @@
-import {useState} from "react";
+import { useState } from "react";
 import JoblyApi from "./api";
+import Alert from "./Alert";
 
 function SignupForm({ handleSubmit }) {
 
@@ -21,6 +22,25 @@ function SignupForm({ handleSubmit }) {
   };
 
   const [formData, setFormData] = useState(initialFormData);
+  const [errors, setErrors] = useState(null);
+
+
+  function submitForm(evt) {
+    evt.preventDefault();
+
+    async function signupUser() {
+      try {
+        const token = await JoblyApi.registerUser(formData);
+        const userData = await JoblyApi.getUserInfo(formData.username);
+        handleSubmit(userData, token);
+      } catch (error) {
+        //console.log("Errors", error);
+        const errorArr = error[0].message;
+        setErrors(errorArr);
+      }
+    }
+    signupUser();
+  }
 
   function handleFormChange(evt) {
     const { name, value } = evt.target;
@@ -29,46 +49,40 @@ function SignupForm({ handleSubmit }) {
     ));
   }
 
-  function submitForm(evt) {
-    evt.preventDefault();
-    async function signupUser(){
-      const token = await JoblyApi.registerUser(formData);
-      const userData = await JoblyApi.getUserInfo(formData.username);
-      handleSubmit(userData, token);
-    }
-    signupUser();
-  }
-
   return (
-    <form onSubmit={submitForm}>
-      <input onChange={handleFormChange}
-        value={formData.username}
-        placeholder="Username"
-        name="username" />
-      <br />
-      <input onChange={handleFormChange}
-        type="password"
-        value={formData.password}
-        placeholder="Password"
-        name="password" />
-      <br />
-      <input onChange={handleFormChange}
-        value={formData.firstName}
-        placeholder="First name"
-        name="firstName" />
-      <br />
-      <input onChange={handleFormChange}
-        value={formData.lastName}
-        placeholder="Last name"
-        name="lastName" />
-      <br />
-      <input onChange={handleFormChange}
-        value={formData.email}
-        placeholder="Email"
-        name="email" />
-      <br />
-      <button>Submit</button>
-    </form>
+    <>
+      <form onSubmit={submitForm}>
+        <input onChange={handleFormChange}
+          value={formData.username}
+          placeholder="Username"
+          name="username" />
+        <br />
+        <input onChange={handleFormChange}
+          type="password"
+          value={formData.password}
+          placeholder="Password"
+          name="password" />
+        <br />
+        <input onChange={handleFormChange}
+          value={formData.firstName}
+          placeholder="First name"
+          name="firstName" />
+        <br />
+        <input onChange={handleFormChange}
+          value={formData.lastName}
+          placeholder="Last name"
+          name="lastName" />
+        <br />
+        <input onChange={handleFormChange}
+          value={formData.email}
+          placeholder="Email"
+          name="email" />
+        <br />
+        <button>Submit</button>
+      </form>
+
+      {errors && <Alert errors={errors} />}
+    </>
   );
 }
 

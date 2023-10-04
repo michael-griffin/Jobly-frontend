@@ -1,9 +1,15 @@
-
+import "./Alert.css";
 
 function Alert({errors}){
-  console.log("ALERT errors", errors, errors[0]);
+  console.log("Alert: errors is", errors);
   return (
-    <div>Alert! You messed up. {errors[0].message}</div>
+    <div className="Alert">
+      <h2>Alert! You messed up.</h2>
+      {errors.map(message => {
+        return <p>{message}</p>
+      })}
+
+    </div>
   )
 }
 
