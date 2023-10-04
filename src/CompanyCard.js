@@ -1,13 +1,13 @@
 
-function CompanyCard({title, description, logoPath}){
+function CompanyCard({name, description, logoUrl}){
 
   // const logoURL = new URL(logo);
-  const logoPath = `./logos/${logoPath}`;
-
+  // const logoPath = `./logos/${logoURL}`;
+  // console.log('title')
   return (
     <div className="CompanyCard">
-      <h6>{title}</h6>
-      <img src={logoPath} alt={title} />
+      <h6>{name}</h6>
+      <img src={logoUrl} alt={name} />
       <p><small>{description}</small></p>
     </div>
   )
