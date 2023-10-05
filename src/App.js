@@ -11,26 +11,39 @@ import jwt_decode from "jwt-decode";
 //  - Want to use user context primarily in jobCard component. For profile update form, nav and homepage, we can pass directly as prop.
 
 // Local storage for token and user (step 4, so after above tasks)
+// TODO: DOCSTRINGS!
 
-// TODO: Use decode to get the user info from token, look up JWT Code library. Remove
-// Set token here in the effect, instead of in API.js
 
-/**  */
+/** App: Job app. Allows user to sign in and view jobs and companies
+ *    including options for user to search for jobs by company or by job title.
+ * Displays Nav bar and routes list.
+ *
+ * Props: None
+ *
+ * State:
+ *  - User: The current logged in user, if any
+ *  - Token: Issued from backend, used for authorization
+ *
+ */
 function App() {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
 
-  useEffect(function getUserToken(){
+  useEffect(function getUserToken() {
     let possToken = localStorage.getItem('token');
-    if (token === null && possToken !== null){
+    // console.log("possToken in getUserToken", possToken, typeof possToken);
+    if (token === null && possToken !== null && possToken !== undefined) {
       setToken(possToken);
     }
   }, []);
 
-  function updateToken(token){
+  /** Updates token and sets within local storage (removes if not available) */
+  function updateToken(token) {
     setToken(token);
-    localStorage.setItem('token', token);
+    (token) ?
+      localStorage.setItem('token', token) :
+      localStorage.removeItem("token"); // Remove token from local storage
   }
 
   async function login(formData) {
@@ -48,9 +61,10 @@ function App() {
     updateToken(null);
   }
 
+  /** Checks state for a token, if token exists set token in Jobly API
+   *    and set user state if token exists. */
   useEffect(function getUserData() {
     async function fetchUserData() {
-      //console.log('token pre-fetch is: ', token);
       if (token !== null) {
         JoblyApi.token = token;
         const decoded = jwt_decode(token);
@@ -61,7 +75,6 @@ function App() {
     }
     fetchUserData();
   }, [token]);
-
 
 
   return (
