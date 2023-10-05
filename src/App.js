@@ -25,21 +25,20 @@ import jwt_decode from "jwt-decode";
  */
 function App() {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  console.log('at app start, isLoaded is: ', isLoaded);
-
-  useEffect(function getUserToken() {
+  const [token, setToken] = useState(() => {
     let possToken = localStorage.getItem('token');
-    // console.log("possToken in getUserToken", possToken, typeof possToken);
-    if (token === null && possToken !== null && possToken !== undefined) {
-      setToken(possToken);
+    if (possToken !== null && possToken !== undefined) {
+      return possToken;
+    } else {
+      return null;
     }
-  }, []);
+  });
+
+  const [isLoaded, setIsLoaded] = useState(false);
 
   /** Updates token and sets within local storage (removes if not available) */
   function updateToken(token) {
+    console.log("token", token);
     setToken(token);
     (token) ?
       localStorage.setItem('token', token) :
@@ -53,6 +52,11 @@ function App() {
 
   async function signup(formData) {
     const token = await JoblyApi.registerUser(formData);
+    updateToken(token);
+  }
+
+  async function update(formData) {
+    const token = await JoblyApi.updateUser(formData);
     updateToken(token);
   }
 
@@ -71,11 +75,8 @@ function App() {
 
         const userData = await JoblyApi.getUserInfo(decoded.username);
         setUser(userData.user);
-        console.log('user data updated');
-        setIsLoaded(true);
-      } else {
-        setIsLoaded(true);
       }
+      setIsLoaded(true);
 
     }
     fetchUserData();
@@ -89,7 +90,7 @@ function App() {
             <userContext.Provider value={{ user, token }}>
             <BrowserRouter>
               <Nav user={user} logout={logout} />
-              <RoutesList user={user} login={login} signup={signup} />
+              <RoutesList user={user} login={login} signup={signup} update={update}/>
             </BrowserRouter>
           </userContext.Provider>
       :

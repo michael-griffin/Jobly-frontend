@@ -1,7 +1,8 @@
 import { useState } from "react";
-import JoblyApi from "./api";
 import Alert from "./Alert";
 
+
+/** Form for signing up a new user */
 function SignupForm({ handleSubmit }) {
 
   //build form, should have function to setUser (passed down from App)

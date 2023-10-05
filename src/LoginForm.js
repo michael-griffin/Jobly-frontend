@@ -1,7 +1,8 @@
 import {useState} from "react";
-import JoblyApi from "./api";
 import Alert from "./Alert";
 
+
+/** Form for loggin in an existing user */
 function LoginForm({ handleSubmit }) {
 
   //build form, should have function to setUser (passed down from App)

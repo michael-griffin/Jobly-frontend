@@ -8,15 +8,18 @@ import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 import ProfileForm from './ProfileForm';
 
-
-function RoutesList({ user, signup, login }) {
+/** Provides routing for app. Will provide access to routes with info on
+ *    companies/jobs/profile if user is logged in, otherwise will
+ *    show only login and signup buttons, and will not allow other routing.
+ */
+function RoutesList({ user, signup, login, update }) {
 
   return (
     <>
       {user ?
         <Routes>
           <Route path="/" element={<Homepage user={user} />} />
-          <Route path="/profile" element={<ProfileForm />} />
+          <Route path="/profile" element={<ProfileForm handleSubmit={update} />} />
           <Route path="/companies" element={<CompanyList />} />
           <Route path="/companies/:handle" element={<CompanyDetail />} />
           <Route path="/jobs" element={<JobList />} />
