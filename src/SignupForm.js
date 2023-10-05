@@ -28,14 +28,14 @@ function SignupForm({ handleSubmit }) {
   function submitForm(evt) {
     evt.preventDefault();
 
+    // TODO: Do all JoblyApi methods in app.js
     async function signupUser() {
       try {
         const token = await JoblyApi.registerUser(formData);
-        const userData = await JoblyApi.getUserInfo(formData.username);
-        handleSubmit(userData, token);
+        handleSubmit(formData.username, token);
       } catch (error) {
-        //console.log("Errors", error);
         const errorArr = error[0].message;
+
         setErrors(errorArr);
       }
     }

@@ -16,15 +16,14 @@ function RoutesList({ user, signup, login }) {
     <>
       {user ?
         <Routes>
-          <Route path="/" element={<Homepage />} />
+          <Route path="/" element={<Homepage user={user} />} />
           <Route path="/profile" element={<ProfileForm />} />
           <Route path="/companies" element={<CompanyList />} />
           <Route path="/companies/:handle" element={<CompanyDetail />} />
           <Route path="/jobs" element={<JobList />} />
           <Route path="/login" element={<Navigate to="/" />} />
           <Route path="/signup" element={<Navigate to="/" />} />
-          <Route path="/NotFound" element={<NotFound />} />
-          <Route path="*" element={<Navigate to="/NotFound" />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         :
         <Routes>

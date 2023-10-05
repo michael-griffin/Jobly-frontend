@@ -23,19 +23,19 @@ function LoginForm({ handleSubmit }) {
 
   function submitForm(evt) {
     evt.preventDefault();
-
-    async function loginUser(){
-      try {
-        const token = await JoblyApi.loginUser(formData);
-        const userData = await JoblyApi.getUserInfo(formData.username);
-        handleSubmit(userData, token);
-      } catch(error) {
-        //console.log("Errors" , error);
-        const errorArr = [error[0].message];
-        setErrors(errorArr);
-      }
-    }
     loginUser();
+  }
+
+  async function loginUser(){
+    try {
+      const token = await JoblyApi.loginUser(formData);
+      // const userData = await JoblyApi.getUserInfo(formData.username);
+      handleSubmit(formData.username, token);
+    } catch(error) {
+      //console.log("Errors" , error);
+      const errorArr = [error[0].message]; // TODO: Refactor alert
+      setErrors(errorArr);
+    }
   }
 
   return (
@@ -45,7 +45,7 @@ function LoginForm({ handleSubmit }) {
         value={formData.username}
         placeholder="Username"
         name="username" />
-      <input onChange={handleFormChange}
+      <input type="password" onChange={handleFormChange}
         value={formData.password}
         placeholder="Password"
         name="password" />
