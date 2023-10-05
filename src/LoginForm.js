@@ -1,5 +1,6 @@
 import {useState} from "react";
 import JoblyApi from "./api";
+import Alert from "./Alert";
 
 function LoginForm({ handleSubmit }) {
 
@@ -10,6 +11,7 @@ function LoginForm({ handleSubmit }) {
     password: ""
   };
   const [formData, setFormData] = useState(initialFormData);
+  const [errors, setErrors] = useState(null);
 
   function handleFormChange(evt) {
     const { name, value } = evt.target;
@@ -23,14 +25,20 @@ function LoginForm({ handleSubmit }) {
     evt.preventDefault();
 
     async function loginUser(){
-      const token = await JoblyApi.loginUser(formData);
-      const userData = await JoblyApi.getUserInfo(formData.username);
-      handleSubmit(userData, token);
+      try {
+        const token = await JoblyApi.loginUser(formData);
+        const userData = await JoblyApi.getUserInfo(formData.username);
+        handleSubmit(userData, token);
+      } catch(error) {
+        console.log("Errors" , error);
+        setErrors(error);
+      }
     }
     loginUser();
   }
 
   return (
+    <>
     <form onSubmit={submitForm}>
       <input onChange={handleFormChange}
         value={formData.username}
@@ -42,6 +50,8 @@ function LoginForm({ handleSubmit }) {
         name="password" />
       <button>Submit</button>
     </form>
+    {errors && <Alert errors={errors}/>}
+    </>
   );
 }
 

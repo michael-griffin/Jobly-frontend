@@ -21,6 +21,8 @@ function RoutesList({ user, signup, login }) {
           <Route path="/companies" element={<CompanyList />} />
           <Route path="/companies/:handle" element={<CompanyDetail />} />
           <Route path="/jobs" element={<JobList />} />
+          <Route path="/login" element={<Navigate to="/" />} />
+          <Route path="/signup" element={<Navigate to="/" />} />
           <Route path="/NotFound" element={<NotFound />} />
           <Route path="*" element={<Navigate to="/NotFound" />} />
         </Routes>
