@@ -31,12 +31,9 @@ function SignupForm({ handleSubmit }) {
 
     async function signupUser() {
       try {
-        //const token = await JoblyApi.registerUser(formData);
         await handleSubmit(formData);
       } catch (error) {
-        const errorArr = error[0].message;
-
-        setErrors(errorArr);
+        setErrors(error);
       }
     }
     signupUser();

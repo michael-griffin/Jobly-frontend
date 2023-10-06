@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import Alert from "./Alert";
 
 
@@ -26,31 +26,32 @@ function LoginForm({ handleSubmit }) {
     loginUser();
   }
 
-  async function loginUser(){
+  async function loginUser() {
     try {
       await handleSubmit(formData);
-    } catch(error) {
-      const errorArr = error[0].message;
-      setErrors(errorArr);
+    } catch (error) {
+      setErrors(error);
     }
   }
 
+  console.log("ERRORS", errors);
+
   return (
     <>
-    <form className="LoginForm" onSubmit={submitForm}>
-      <label className="form-label" htmlFor="username">Username</label>
-      <input onChange={handleFormChange}
-        value={formData.username}
-        placeholder="Username"
-        name="username" />
-      <label className="form-label" htmlFor="password">Password</label>
-      <input type="password" onChange={handleFormChange}
-        value={formData.password}
-        placeholder="Password"
-        name="password" />
-      <button>Submit</button>
-    </form>
-    {errors && <Alert errors={errors}/>}
+      <form className="LoginForm" onSubmit={submitForm}>
+        <label className="form-label" htmlFor="username">Username</label>
+        <input onChange={handleFormChange}
+          value={formData.username}
+          placeholder="Username"
+          name="username" />
+        <label className="form-label" htmlFor="password">Password</label>
+        <input type="password" onChange={handleFormChange}
+          value={formData.password}
+          placeholder="Password"
+          name="password" />
+        <button>Submit</button>
+      </form>
+      {errors && <Alert errors={errors} />}
     </>
   );
 }

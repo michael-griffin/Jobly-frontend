@@ -1,22 +1,28 @@
 import "./Alert.css";
 
 /** Returns an alert message containing any errors passed in argument. */
-function Alert({errors}){
+function Alert({ errors }) {
   let errorMessage;
-  if (Array.isArray(errors)) {
-    errorMessage = errors.map((message, idx) => {
-      return <p key={idx}>{message}</p>
-    })
+
+  if (Array.isArray(errors)) errorMessage = errors[0].message;
+  else if (errors.message) errorMessage = errors.message;
+
+  let errorDisplay;
+  if (Array.isArray(errorMessage)) {
+    errorDisplay = errorMessage.map((message, idx) => {
+      return <p key={idx}>{message}</p>;
+    });
   } else {
-    errorMessage = <p>{errors}</p>;
+    errorDisplay = <p>{errorMessage}</p>;
   }
+
 
   return (
     <div className="Alert">
       <h2>Alert! You messed up.</h2>
-      {errorMessage}
+      {errorDisplay}
     </div>
-  )
+  );
 }
 
 export default Alert;

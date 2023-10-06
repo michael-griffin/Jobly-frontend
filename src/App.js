@@ -14,12 +14,9 @@ import Loading from './Loading';
 // api: updateUser method now accepts both user AND username
 //    (wasn't grabbing user properly, hence authorization error)
 
-// TODO: Time for debounce could be a context variable instead of assigned to a named function.
-
 // Notes on context:
 //  - Want to use user context primarily in jobCard component.
 //  For profile update form, nav and homepage, we can pass directly as prop.
-
 
 
 
@@ -41,7 +38,8 @@ function App() {
 
   /** Updates token and sets within local storage (removes if not available) */
   function updateToken(token) {
-    console.log("token", token);
+    // console.log("token", token);
+
     setToken(token);
     (token) ?
       localStorage.setItem("token", token) :
@@ -69,17 +67,25 @@ function App() {
     updateToken(null);
   }
 
+  // TODO:
+  async function apply(username, jobId) {
+  return await JoblyApi.applyToJob(username, jobId);
+  }
+
 
   /** Checks state for a token, if token exists set token in Jobly API
    *    and set user state if token exists. */
   useEffect(function getUserData() {
     async function fetchUserData() {
-      if (token !== null) {
-        JoblyApi.token = token;
-        const decoded = jwt_decode(token);
-
-        const userData = await JoblyApi.getUserInfo(decoded.username);
-        setUser(userData.user);
+      if (token) {
+        try { // Using try/catch block here to check for bad existing token from local storage
+          JoblyApi.token = token;
+          const decoded = jwt_decode(token);
+          const userData = await JoblyApi.getUserInfo(decoded.username);
+          setUser(userData.user);
+        } catch(err) {
+          console.error(err);
+        }
       }
       setIsLoaded(true);
 
@@ -91,7 +97,7 @@ function App() {
   return (
     <div className="App">
       {isLoaded ?
-            <userContext.Provider value={{ user, token }}>
+            <userContext.Provider value={{ user, token, apply }}>
             <BrowserRouter>
               <Nav user={user} logout={logout} />
               <RoutesList user={user} login={login} signup={signup} update={update}/>
