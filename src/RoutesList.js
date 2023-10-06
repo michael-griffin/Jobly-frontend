@@ -7,6 +7,7 @@ import NotFound from './NotFound';
 import SignupForm from './SignupForm';
 import LoginForm from './LoginForm';
 import ProfileForm from './ProfileForm';
+import CompaniesAppliedTo from './CompaniesAppliedTo';
 
 /** Provides routing for app. Will provide access to routes with info on
  *    companies/jobs/profile if user is logged in, otherwise will
@@ -23,6 +24,7 @@ function RoutesList({ user, signup, login, update }) {
           <Route path="/companies" element={<CompanyList />} />
           <Route path="/companies/:handle" element={<CompanyDetail />} />
           <Route path="/jobs" element={<JobList />} />
+          <Route path="/applications" element={<CompaniesAppliedTo />} />
           <Route path="/login" element={<Navigate to="/" />} />
           <Route path="/signup" element={<Navigate to="/" />} />
           <Route path="*" element={<NotFound />} />

@@ -2,7 +2,7 @@ import "./JobCard.css";
 import { useContext } from "react";
 import userContext from "./userContext";
 
-//FIXME: make a real unapplied function
+//FIXME: make a real unApply function
 
 /** Displays Job Card with info on company, salary, equity. */
 function JobCard({title, companyHandle, salary, equity, jobId} ){

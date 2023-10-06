@@ -16,6 +16,7 @@ function Nav({ user, logout }) {
           <NavLink to="/companies">Companies</NavLink>
           <NavLink to="/jobs">Jobs</NavLink>
           <NavLink to="/profile">Profile</NavLink>
+          <NavLink to="/applications">Applications</NavLink>
           <Link to="/" onClick={logout}>Logout</Link>
         </>
         :
