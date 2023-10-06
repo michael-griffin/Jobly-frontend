@@ -21,7 +21,6 @@ function LoginForm({ handleSubmit }) {
     ));
   }
 
-
   function submitForm(evt) {
     evt.preventDefault();
     loginUser();

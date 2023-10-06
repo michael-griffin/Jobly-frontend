@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import Alert from "./Alert";
 import userContext from "./userContext";
+import Success from "./Success";
 
 
 /** Form for updating a user's profile */
@@ -18,18 +19,20 @@ function ProfileForm({ handleSubmit }) {
 
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   function submitForm(evt) {
     evt.preventDefault();
 
     async function updateUser() {
       try {
-        console.log("formData", formData);
         await handleSubmit(formData);
+        setSuccessMessage("User profile successfully updated!");
+        setErrors(null);
       } catch (error) {
-        const errorArr = error[0].message;
+        const errorMessages = error[0].message;
 
-        setErrors(errorArr);
+        setErrors(errorMessages);
       }
     }
     updateUser();
@@ -70,7 +73,10 @@ function ProfileForm({ handleSubmit }) {
         <button>Submit</button>
       </form>
 
-      {errors && <Alert errors={errors} />}
+      {errors ?
+        <Alert errors={errors} /> :
+        successMessage && <Success successMessage={successMessage} />
+      }
     </>
   );
 }

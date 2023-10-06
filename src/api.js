@@ -83,7 +83,6 @@ class JoblyApi {
   }
 
   static async registerUser(userRegisterInfo) {
-    // console.log('user register info is: ', userRegisterInfo);
     const res = await this.request('auth/register', userRegisterInfo, "POST");
     return res.token;
   }

@@ -1,6 +1,8 @@
 import { useState } from "react";
 
-function SearchBar({ handleSearch }) { //handleSubmit
+
+/** Searches as user types, using debounce library. */
+function SearchBar({ handleSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   function handleSearchTermChange(evt) {
@@ -8,11 +10,6 @@ function SearchBar({ handleSearch }) { //handleSubmit
     setSearchTerm(term);
     handleSearch(searchTerm);
   }
-
-  // function submitForm(evt) {
-  //   evt.preventDefault();
-  //   handleSubmit(searchTerm);
-  // }
 
   return (
     <form>
@@ -22,13 +19,6 @@ function SearchBar({ handleSearch }) { //handleSubmit
         name="search" />
     </form>
   );
-  //   <form onSubmit={submitForm}>
-  //   <input onChange={handleSearchTermChange}
-  //     value={searchTerm}
-  //     placeholder="Search"
-  //     name="search" />
-  //   <button>Submit</button>
-  // </form>
 }
 
 export default SearchBar;

@@ -2,8 +2,11 @@ import "./Nav.css";
 import { NavLink, Link } from "react-router-dom";
 
 
-
-function Nav({ user, login, signup, logout }) {
+/** Renders navigation bar for website.
+ * Shows login/signup/homepage only if user not logged in.
+ * If user is logged in, show all links to companies/jobs/profile/homepage.
+ */
+function Nav({ user, logout }) {
 
   return (
     <nav className="NavBar">

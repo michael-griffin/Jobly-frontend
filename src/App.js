@@ -6,17 +6,21 @@ import Nav from './Nav';
 import userContext from "./userContext";
 import JoblyApi from './api';
 import jwt_decode from "jwt-decode";
+import Loading from './Loading';
 
-//TODO: update Josh about:
+
 //Profile form: form itself basically unchanged, added a few things to app/api
 // App: updated user now sets User State (as we'd expect)
 // api: updateUser method now accepts both user AND username
 //    (wasn't grabbing user properly, hence authorization error)
 
+// TODO: Time for debounce could be a context variable instead of assigned to a named function.
 
 // Notes on context:
 //  - Want to use user context primarily in jobCard component.
 //  For profile update form, nav and homepage, we can pass directly as prop.
+
+
 
 
 /** App: Job app. Allows user to sign in and view jobs and companies
@@ -32,15 +36,7 @@ import jwt_decode from "jwt-decode";
  */
 function App() {
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(() => {
-    let possToken = localStorage.getItem('token');
-    if (possToken !== null && possToken !== undefined) {
-      return possToken;
-    } else {
-      return null;
-    }
-  });
-
+  const [token, setToken] = useState(localStorage.getItem('token'));
   const [isLoaded, setIsLoaded] = useState(false);
 
   /** Updates token and sets within local storage (removes if not available) */
@@ -48,7 +44,7 @@ function App() {
     console.log("token", token);
     setToken(token);
     (token) ?
-      localStorage.setItem('token', token) :
+      localStorage.setItem("token", token) :
       localStorage.removeItem("token");
   }
 
@@ -73,6 +69,7 @@ function App() {
     updateToken(null);
   }
 
+
   /** Checks state for a token, if token exists set token in Jobly API
    *    and set user state if token exists. */
   useEffect(function getUserData() {
@@ -91,7 +88,6 @@ function App() {
   }, [token]);
 
 
-
   return (
     <div className="App">
       {isLoaded ?
@@ -102,7 +98,7 @@ function App() {
             </BrowserRouter>
           </userContext.Provider>
       :
-      <p>Loading...</p>
+      <Loading />
       }
     </div>
   );

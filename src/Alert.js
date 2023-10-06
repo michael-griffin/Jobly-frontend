@@ -1,5 +1,6 @@
 import "./Alert.css";
 
+/** Returns an alert message containing any errors passed in argument. */
 function Alert({errors}){
   let errorMessage;
   if (Array.isArray(errors)) {
