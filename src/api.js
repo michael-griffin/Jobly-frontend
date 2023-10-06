@@ -97,6 +97,11 @@ class JoblyApi {
     return res.user;
   }
 
+  static async updateCompany(handle, companyUpdateInfo) {
+    const res = await this.request(`companies/${handle}`, companyUpdateInfo, "PATCH");
+    return res;
+  }
+
   static async getUserInfo(username) {
     const res = await this.request(`users/${username}`);
     return res.user;

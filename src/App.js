@@ -62,6 +62,12 @@ function App() {
     setUser(newUser);
   }
 
+  async function updateCompany(handle, formData){
+    JoblyApi.token = token;
+    const newCompany = await JoblyApi.updateCompany(handle, formData);
+    console.log('updated company info for ', newCompany);
+  }
+
   function logout() {
     setUser(null);
     updateToken(null);
@@ -101,7 +107,7 @@ function App() {
             <userContext.Provider value={{ user, token, apply }}>
             <BrowserRouter>
               <Nav user={user} logout={logout} />
-              <RoutesList user={user} login={login} signup={signup} update={update}/>
+              <RoutesList user={user} login={login} signup={signup} update={update} updateCompany={updateCompany}/>
             </BrowserRouter>
           </userContext.Provider>
       :

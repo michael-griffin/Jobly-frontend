@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Homepage from './Homepage';
 import CompanyList from './CompanyList';
 import CompanyDetail from './CompanyDetail';
+import CompanyForm from './CompanyForm';
 import JobList from './JobList';
 import NotFound from './NotFound';
 import SignupForm from './SignupForm';
@@ -25,6 +26,7 @@ function RoutesList({ user, signup, login, update }) {
           <Route path="/companies/:handle" element={<CompanyDetail />} />
           <Route path="/jobs" element={<JobList />} />
           <Route path="/applications" element={<CompaniesAppliedTo />} />
+          {user.isAdmin && <Route path="/companies/editform" element={<CompanyForm />} />}
           <Route path="/login" element={<Navigate to="/" />} />
           <Route path="/signup" element={<Navigate to="/" />} />
           <Route path="*" element={<NotFound />} />
