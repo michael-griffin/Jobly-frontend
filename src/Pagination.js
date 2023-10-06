@@ -19,7 +19,7 @@ function Pagination({ pageNum, nPages, setPageNum}) {
       <button  onClick={prevPage} disabled={pageNum === 1}>Prev</button>
       {arrPages.map((num, ind) => {
         return ((num === pageNum) ?
-          <button key={ind} className="currentPage" >{num}</button>
+          <button key={ind} className="currentPage">{num}</button>
           :
           <button key={ind} onClick={() => setPageNum(num)}>{num}</button>);
       })}
@@ -30,9 +30,3 @@ function Pagination({ pageNum, nPages, setPageNum}) {
 
 
 export default Pagination;
-
-
-// ((num === pageNum) ?
-//           pNum = <p>num</p>
-//           :
-//           pNum = <p onClick={() => setPageNum(num)}>num</p>);

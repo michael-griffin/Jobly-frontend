@@ -22,8 +22,6 @@ const perPage = 20;
 function CompaniesAppliedTo() {
   const { user } = useContext(userContext);
 
-  console.log("user", user, "Apps", user.applications);
-
   const [companies, setCompanies] = useState([]);
   const [pageNum, setPageNum] = useState(1);
 
@@ -38,14 +36,13 @@ function CompaniesAppliedTo() {
   useEffect(function getCompaniesAppliedTo() {
     async function getCompaniesAppliedToFromApi() {
 
+      // Would prefer to put the below logic into a method in the api
       const allCompanies = await JoblyApi.getCompanies();
       const allJobs = await JoblyApi.getJobs();
 
       const jobsAppliedTo = allJobs.filter(job => user.applications.includes(job.id));
       const handles = jobsAppliedTo.map(job => job.companyHandle)
       const companies = allCompanies.filter(company => handles.includes(company.handle));
-
-      console.log("Companies from getCompanies", companies);
 
       setCompanies(companies);
     }
