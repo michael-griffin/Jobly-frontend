@@ -1,20 +1,29 @@
+import "./Pagination.css";
 
 
-
-function Pagination({ currentPage, nPages, setPage, prevPage, nextPage }) {
+function Pagination({ pageNum, nPages, setPageNum}) {
 
   let arrPages = [...Array(nPages + 1).keys()].slice(1); //[1,2,3,...nPages]
 
+  function prevPage(){
+    if (pageNum > 1) setPageNum(prev => prev-1);
+  }
+
+  function nextPage(){
+    if (pageNum < nPages) setPageNum(prev => prev+1);
+  }
+
+
   return (
-    <ul>
-      <li onCLick={prevPage}>Prev</li>
+    <ul className="Pagination">
+      <button  onClick={prevPage} disabled={pageNum === 1}>Prev</button>
       {arrPages.map(num => {
-        return ((num === currentPage) ?
-          pNum = <p style={{backgroundColor: "blue", color: "white"}}>num</p>
+        return ((num === pageNum) ?
+          <button className="currentPage" >{num}</button>
           :
-          pNum = <p onClick={() => setPage(num)}>num</p>);
+          <button onClick={() => setPageNum(num)}>{num}</button>);
       })}
-      <li onClick={nextPage}>Next</li>
+      <button onClick={nextPage} disabled={pageNum === nPages}>Next</button>
     </ul>
 
   );
@@ -24,7 +33,7 @@ function Pagination({ currentPage, nPages, setPage, prevPage, nextPage }) {
 export default Pagination;
 
 
-// ((num === currentPage) ?
+// ((num === pageNum) ?
 //           pNum = <p>num</p>
 //           :
-//           pNum = <p onClick={() => setPage(num)}>num</p>);
+//           pNum = <p onClick={() => setPageNum(num)}>num</p>);

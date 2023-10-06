@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import CompanyCard from "./CompanyCard";
 import SearchBar from "./SearchBar";
+import Pagination from "./Pagination";
 import JoblyApi from "./api";
 import _ from "lodash"; //possible alternative: import {debounce} from "lodash"
+
 
 /* Displays a list of companies (which can be narrowed by Search)
  *
@@ -14,9 +16,20 @@ import _ from "lodash"; //possible alternative: import {debounce} from "lodash"
  *
  * App -> RoutesList -> CompanyList -> CompanyCard
  */
+const perPage = 20;
+
 function CompanyList() {
 
   const [companies, setCompanies] = useState([]);
+  const [pageNum, setPageNum] = useState(1);
+
+  const nPages = Math.ceil(companies.length/perPage);
+
+  function getCompaniesOnPage(){
+    let start = (pageNum-1)*perPage;
+    let finish = Math.min(companies.length, start+perPage);
+    return companies.slice(start, finish);
+  }
 
   useEffect(function getCompanies() {
     async function getCompaniesFromApi() {
@@ -36,7 +49,9 @@ function CompanyList() {
   }
 
   function makeCompanyCardList() {
-    return companies.map(company => (
+    const companiesOnPage = getCompaniesOnPage();
+
+    return companiesOnPage.map(company => (
       <CompanyCard key={company.handle}
         handle={company.handle}
         name={company.name}
@@ -50,6 +65,7 @@ function CompanyList() {
     <div className="CompanyList">
       <SearchBar handleSearch={debounceSearch} />
       {makeCompanyCardList()}
+      <Pagination pageNum={pageNum} nPages={nPages} setPageNum={setPageNum} />
     </div>
   );
 }
