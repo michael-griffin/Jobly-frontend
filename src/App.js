@@ -67,9 +67,10 @@ function App() {
     updateToken(null);
   }
 
-  // TODO:
   async function apply(username, jobId) {
-  return await JoblyApi.applyToJob(username, jobId);
+    const applyMsg = await JoblyApi.applyToJob(username, jobId);
+    const newUser = await JoblyApi.getUserInfo(username);
+    setUser(newUser);
   }
 
 
@@ -82,7 +83,7 @@ function App() {
           JoblyApi.token = token;
           const decoded = jwt_decode(token);
           const userData = await JoblyApi.getUserInfo(decoded.username);
-          setUser(userData.user);
+          setUser(userData);
         } catch(err) {
           console.error(err);
         }

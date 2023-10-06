@@ -34,7 +34,6 @@ function LoginForm({ handleSubmit }) {
     }
   }
 
-  console.log("ERRORS", errors);
 
   return (
     <>

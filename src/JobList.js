@@ -1,6 +1,6 @@
 import SearchBar from "./SearchBar";
 import JobCardList from "./JobCardList";
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import JoblyApi from './api';
 import Pagination from "./Pagination";
 import _ from "lodash"; //possible alternative: import {debounce} from "lodash"
@@ -22,7 +22,6 @@ function JobList() {
   const [jobs, setJobs] = useState([]);
   const [pageNum, setPageNum] = useState(1);
 
-  // nPages, setPage, prevPage, nextPage
   const nPages = Math.ceil(jobs.length/perPage);
 
   function getJobsOnPage(){

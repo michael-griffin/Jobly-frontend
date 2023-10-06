@@ -17,15 +17,14 @@ function Pagination({ pageNum, nPages, setPageNum}) {
   return (
     <ul className="Pagination">
       <button  onClick={prevPage} disabled={pageNum === 1}>Prev</button>
-      {arrPages.map(num => {
+      {arrPages.map((num, ind) => {
         return ((num === pageNum) ?
-          <button className="currentPage" >{num}</button>
+          <button key={ind} className="currentPage" >{num}</button>
           :
-          <button onClick={() => setPageNum(num)}>{num}</button>);
+          <button key={ind} onClick={() => setPageNum(num)}>{num}</button>);
       })}
       <button onClick={nextPage} disabled={pageNum === nPages}>Next</button>
     </ul>
-
   );
 }
 
