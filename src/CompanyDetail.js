@@ -31,7 +31,7 @@ function CompanyDetail() {
       }
     }
     fetchCompanyInfo();
-  }, []);
+  }, [handle]);
 
   return (
     <div className="CompanyDetail">

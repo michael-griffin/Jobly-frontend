@@ -1,4 +1,4 @@
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './Homepage.css';
 
 /** Homepage which displays welcome message or login/sign up buttons */

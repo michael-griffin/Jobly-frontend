@@ -47,7 +47,7 @@ function CompaniesAppliedTo() {
       setCompanies(companies);
     }
     getCompaniesAppliedToFromApi();
-  }, []);
+  }, [user]);
 
 
   const debounceTime = 1000; //time in ms

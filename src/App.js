@@ -9,15 +9,9 @@ import jwt_decode from "jwt-decode";
 import Loading from './Loading';
 
 
-//Profile form: form itself basically unchanged, added a few things to app/api
-// App: updated user now sets User State (as we'd expect)
-// api: updateUser method now accepts both user AND username
-//    (wasn't grabbing user properly, hence authorization error)
-
 // Notes on context:
-//  - Want to use user context primarily in jobCard component.
-//  For profile update form, nav and homepage, we can pass directly as prop.
-
+//  - Using context in: JobCard, ProfileForm.
+//  - For nav and homepage, passing user directly as prop.
 
 
 /** App: Job app. Allows user to sign in and view jobs and companies
@@ -74,7 +68,8 @@ function App() {
   }
 
   async function apply(username, jobId) {
-    const applyMsg = await JoblyApi.applyToJob(username, jobId);
+    //const applyMsg = await JoblyApi.applyToJob(username, jobId);
+    await JoblyApi.applyToJob(username, jobId);
     const newUser = await JoblyApi.getUserInfo(username);
     setUser(newUser);
   }
