@@ -1,19 +1,15 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import {useLocation} from 'react-router-dom';
 import Alert from "./Alert";
-import userContext from "./userContext";
 import Success from "./Success";
 
 
 /** Form for updating a user's profile */
 function CompanyForm({ handleSubmit }) {
 
-
   const location = useLocation();
-  console.log('location is: ', location);
+  // console.log('location is: ', location);
   const companyData = location.state;
-
-  // const {user } = useContext(userContext);
 
   const initialFormData = {
     title: companyData.title,
