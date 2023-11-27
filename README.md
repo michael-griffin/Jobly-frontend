@@ -3,9 +3,10 @@
 A job application platform: view companies' jobs and apply.
 
 **Note: Takes ~10-20 secs upon login to load**
-Deployed on: https://stirring-conkies-6eaf35.netlify.app
-**User: guest
-Password: password**
+
+Deployed on: https://stirring-conkies-6eaf35.netlify.app <br>
+**User: guest <br>
+Password: password** <br>
 
 Backend codebase: https://github.com/michael-griffin/express-jobly
 
