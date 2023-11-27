@@ -7,6 +7,9 @@ function Homepage({ user }) {
     <div className="Homepage">
       <h1>Jobly</h1>
       <p>All the jobs in one, convenient place.</p>
+      <p>At Jobly, we believe every job application is a new opportunity for
+        your future! But the <span className="Homepage-bold">most important</span> job application is always
+        the one you may or may not currently be fielding from me</p>
       {user ?
         <h2>Welcome back, {user.username}!</h2>
         :

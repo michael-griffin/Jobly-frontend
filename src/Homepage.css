@@ -47,3 +47,27 @@ button {
 .Alert p {
   margin: 0px;
 }
+
+.Homepage {
+  color: rgb(236, 234, 234);
+  background-color:rgba(10, 88, 204, .3);
+  width: 35%;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 10px 20px;
+}
+
+.Homepage p {
+  font-size: 1.1rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+.Homepage-bold {
+  font-weight: bold;
+  color: rgb(0, 255, 150);
+}
