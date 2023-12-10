@@ -2,9 +2,9 @@
 
 A job application platform: view companies' jobs and apply.
 
-**Note: Takes ~10-20 secs upon login to load**
+**Note: Can take ~10-20 secs upon login to load**
 
-Deployed on: https://stirring-conkies-6eaf35.netlify.app <br>
+Deployed on: https://mg-jobly.netlify.app <br>
 **User: guest <br>
 Password: password** <br>
 
