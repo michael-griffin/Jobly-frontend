@@ -2,15 +2,17 @@
 
 A job application platform: view companies' jobs and apply.
 
-**Note: Can take ~10-20 secs upon login to load**
+**Note: Can take ~10 secs upon login to load**
 
-Deployed on: https://mg-jobly.netlify.app <br>
+Deployed on: https://jobly.michaellngriffin.com/<br>
 **User: guest <br>
 Password: password** <br>
 
 Backend codebase: https://github.com/michael-griffin/express-jobly
 
-Local Setup
+<br>
+
+### Local Setup
 
     Install dependencies and run app.
 
